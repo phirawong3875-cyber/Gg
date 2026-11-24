@@ -5,19 +5,58 @@
       "name": "Arknights: Endfield",
       "image": "assets/games/endfield.png",
       "description": "เกมของฉัน",
-      "detail": "ข้อมูลเกี่ยวกับ Arknights: Endfield"
+      "categories": {
+        "ข้อมูลเกม": {
+          "ชื่อเกม": "Arknights: Endfield"
+        },
+        "ข้อมูลส่วนตัว": {
+          "ชื่อในเกม (IGN)": "",
+          "เซิร์ฟเวอร์": "",
+          "UID": ""
+        }
+      },
+      "gallery": [
+        "assets/games/endfield-1.png",
+        "assets/games/endfield-2.png"
+      ]
     },
     {
       "name": "Zenless Zone Zero",
       "image": "assets/games/zzz.png",
       "description": "เกมของฉัน",
-      "detail": "ข้อมูลเกี่ยวกับ Zenless Zone Zero"
+      "categories": {
+        "ข้อมูลเกม": {
+          "ชื่อเกม": "Zenless Zone Zero"
+        },
+        "ข้อมูลส่วนตัว": {
+          "ชื่อในเกม (IGN)": "",
+          "เซิร์ฟเวอร์": "",
+          "UID": ""
+        }
+      },
+      "gallery": [
+        "assets/games/zzz-1.png",
+        "assets/games/zzz-2.png"
+      ]
     },
     {
       "name": "Minecraft",
       "image": "assets/games/minecraft.png",
       "description": "เกมของฉัน",
-      "detail": "ข้อมูลเกี่ยวกับ Minecraft"
+      "categories": {
+        "ข้อมูลเกม": {
+          "ชื่อเกม": "Minecraft"
+        },
+        "ข้อมูลส่วนตัว": {
+          "ชื่อในเกม (IGN)": "",
+          "เซิร์ฟเวอร์": "",
+          "UID": ""
+        }
+      },
+      "gallery": [
+        "assets/games/minecraft-1.png",
+        "assets/games/minecraft-2.png"
+      ]
     }
   ],
   "platforms": [
@@ -25,26 +64,65 @@
       "name": "Discord",
       "image": "https://cdn.simpleicons.org/discord/ffffff",
       "description": "แพลตฟอร์มของฉัน",
-      "detail": "พื้นที่พูดคุยและติดต่อผ่าน Discord"
+      "categories": {
+        "ข้อมูลแอป": {
+          "ชื่อแอป": "Discord"
+        },
+        "ข้อมูลส่วนตัว": {
+          "ชื่อบัญชี": "",
+          "Username": "",
+          "ลิงก์โปรไฟล์": ""
+        }
+      },
+      "gallery": []
     },
     {
       "name": "Instagram",
       "image": "https://cdn.simpleicons.org/instagram/E4405F",
       "description": "แพลตฟอร์มของฉัน",
-      "detail": "ติดตามฉันผ่าน Instagram"
+      "categories": {
+        "ข้อมูลแอป": {
+          "ชื่อแอป": "Instagram"
+        },
+        "ข้อมูลส่วนตัว": {
+          "ชื่อบัญชี": "",
+          "Username": "",
+          "ลิงก์โปรไฟล์": ""
+        }
+      },
+      "gallery": []
     },
     {
       "name": "HoYoLAB",
       "image": "https://cdn.simpleicons.org/hoyolab/ffffff",
       "description": "แพลตฟอร์มของฉัน",
-      "detail": "ชุมชนสำหรับผู้เล่นเกมจาก HoYoverse"
+      "categories": {
+        "ข้อมูลแอป": {
+          "ชื่อแอป": "HoYoLAB"
+        },
+        "ข้อมูลส่วนตัว": {
+          "ชื่อบัญชี": "",
+          "Username": "",
+          "ลิงก์โปรไฟล์": ""
+        }
+      },
+      "gallery": []
     },
     {
       "name": "Kahoot!",
       "image": "https://cdn.simpleicons.org/kahoot/ffffff",
       "description": "แพลตฟอร์มของฉัน",
-      "detail": "แพลตฟอร์มเกมตอบคำถาม"
+      "categories": {
+        "ข้อมูลแอป": {
+          "ชื่อแอป": "Kahoot!"
+        },
+        "ข้อมูลส่วนตัว": {
+          "ชื่อบัญชี": "",
+          "Username": "",
+          "ลิงก์โปรไฟล์": ""
+        }
+      },
+      "gallery": []
     }
   ]
 }
-
