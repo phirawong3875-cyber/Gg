@@ -1,1 +1,50 @@
 
+{
+  "games": [
+    {
+      "name": "Arknights: Endfield",
+      "image": "assets/games/endfield.png",
+      "description": "เกมของฉัน",
+      "detail": "ข้อมูลเกี่ยวกับ Arknights: Endfield"
+    },
+    {
+      "name": "Zenless Zone Zero",
+      "image": "assets/games/zzz.png",
+      "description": "เกมของฉัน",
+      "detail": "ข้อมูลเกี่ยวกับ Zenless Zone Zero"
+    },
+    {
+      "name": "Minecraft",
+      "image": "assets/games/minecraft.png",
+      "description": "เกมของฉัน",
+      "detail": "ข้อมูลเกี่ยวกับ Minecraft"
+    }
+  ],
+  "platforms": [
+    {
+      "name": "Discord",
+      "image": "https://cdn.simpleicons.org/discord/ffffff",
+      "description": "แพลตฟอร์มของฉัน",
+      "detail": "พื้นที่พูดคุยและติดต่อผ่าน Discord"
+    },
+    {
+      "name": "Instagram",
+      "image": "https://cdn.simpleicons.org/instagram/E4405F",
+      "description": "แพลตฟอร์มของฉัน",
+      "detail": "ติดตามฉันผ่าน Instagram"
+    },
+    {
+      "name": "HoYoLAB",
+      "image": "https://cdn.simpleicons.org/hoyolab/ffffff",
+      "description": "แพลตฟอร์มของฉัน",
+      "detail": "ชุมชนสำหรับผู้เล่นเกมจาก HoYoverse"
+    },
+    {
+      "name": "Kahoot!",
+      "image": "https://cdn.simpleicons.org/kahoot/ffffff",
+      "description": "แพลตฟอร์มของฉัน",
+      "detail": "แพลตฟอร์มเกมตอบคำถาม"
+    }
+  ]
+}
+
