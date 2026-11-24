@@ -1,52 +1,76 @@
 
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Details | Furinas(433)</title>
+  <title>รายละเอียด | Furinas(433)</title>
 
-    <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Furinas(433) Personal Profile">
+  <meta name="theme-color" content="#07194a">
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <main class="container">
+  <div class="background-glow"></div>
 
-        <a href="index.html" class="back-button">
-            ← กลับหน้าหลัก
-        </a>
+  <main class="container">
 
-        <section class="detail-hero">
+    <!-- BACK BUTTON -->
+    <a href="index.html" class="back-button">
+      <span>←</span>
+      กลับหน้าหลัก
+    </a>
 
-            <div class="detail-image">
-                <img id="detailImage" src="" alt="Game image">
-            </div>
+    <!-- DETAIL HEADER -->
+    <section class="detail-hero">
 
-            <div class="detail-content">
+      <div class="detail-image">
+        <img
+          id="detailImage"
+          src=""
+          alt="รูปภาพรายการ"
+          onerror="this.style.display='none'"
+        >
+      </div>
 
-                <span class="detail-label">
-                    FURINAS(433) COLLECTION
-                </span>
+      <div class="detail-content">
 
-                <h1 id="detailTitle">กำลังโหลด...</h1>
+        <span class="detail-label">
+          FURINAS(433) PROFILE
+        </span>
 
-                <p id="detailDescription">
-                    ข้อมูลรายละเอียด
-                </p>
+        <h1 id="detailTitle">
+          กำลังโหลด...
+        </h1>
 
-            </div>
+        <p id="detailDescription">
+          กำลังโหลดข้อมูล...
+        </p>
 
-        </section>
+      </div>
 
-        <footer>
-            © 2026 Furinas(433)
-        </footer>
+    </section>
 
-    </main>
+    <!-- DETAIL SECTIONS
+         main.js จะสร้างข้อมูลตรงนี้อัตโนมัติ
+    -->
 
-    <script src="main.js"></script>
+    <div id="detailSections" class="detail-sections"></div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>© 2026 Furinas(433) — All Rights Reserved.</p>
+      <p>Made with ♡</p>
+    </footer>
+
+  </main>
+
+  <script src="main.js"></script>
 
 </body>
 </html>
