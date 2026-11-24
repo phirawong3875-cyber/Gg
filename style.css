@@ -295,4 +295,30 @@ footer {
         grid-template-columns: 1fr;
     }
 
+/* DETAIL PAGE */
+
+.back-button {
+    display: inline-block;
+    color: #b8d8ff;
+    text-decoration: none;
+    padding: 10px 16px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background: rgba(50, 90, 180, 0.35);
+    border: 1px solid var(--border);
 }
+
+.back-button:hover {
+    box-shadow: 0 0 15px #398cff;
+}
+
+.detail-section h1 {
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+
+.detail-section > p {
+    color: #b9ceff;
+    margin-bottom: 25px;
+}
+
