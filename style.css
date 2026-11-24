@@ -60,3 +60,151 @@
         font-size: 21px;
     }
 }
+
+/* =================================
+   ANIMATED NEON EFFECTS
+================================= */
+
+/* Animated Background */
+
+body {
+    background-size: 200% 200%;
+    animation: backgroundMove 15s ease infinite;
+}
+
+@keyframes backgroundMove {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Moving Glow */
+
+.background-glow {
+    animation: glowMove 8s ease-in-out infinite alternate;
+}
+
+@keyframes glowMove {
+    from {
+        transform: translate(-30px, -20px);
+        opacity: 0.15;
+    }
+
+    to {
+        transform: translate(40px, 30px);
+        opacity: 0.35;
+    }
+}
+
+/* Banner Glow */
+
+.banner {
+    position: relative;
+    box-shadow:
+        0 0 15px rgba(57, 140, 255, 0.3),
+        0 0 35px rgba(118, 92, 255, 0.2);
+    animation: bannerGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes bannerGlow {
+    from {
+        box-shadow: 0 0 15px #2865ff44;
+    }
+
+    to {
+        box-shadow: 0 0 30px #765cff88;
+    }
+}
+
+/* Card Animation */
+
+.item-card {
+    animation: cardAppear 0.7s ease both;
+}
+
+.item-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow:
+        0 0 15px #398cff88,
+        0 0 30px #765cff44;
+}
+
+/* Content Animation */
+
+.content-section {
+    animation: fadeIn 0.8s ease both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Profile Glow */
+
+.profile-avatar {
+    animation: avatarGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes avatarGlow {
+    from {
+        box-shadow: 0 0 10px #398cff;
+    }
+
+    to {
+        box-shadow: 0 0 25px #765cff;
+    }
+}
+
+/* Detail Animation */
+
+.detail-hero {
+    animation: fadeIn 0.8s ease both;
+}
+
+/* Mobile Performance */
+
+@media (max-width: 700px) {
+    .item-card:hover {
+        transform: none;
+    }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
