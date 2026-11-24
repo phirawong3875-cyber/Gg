@@ -1,8 +1,10 @@
 
-// ==============================
+// ======================================
 // FURINAS(433) PROFILE
 // MAIN SYSTEM
-// ==============================
+// ======================================
+
+// GAME DATA
 
 const games = [
     {
@@ -24,6 +26,9 @@ const games = [
         detail: "ข้อมูลเกี่ยวกับ Minecraft"
     }
 ];
+
+
+// PLATFORM DATA
 
 const platforms = [
     {
@@ -53,84 +58,137 @@ const platforms = [
 ];
 
 
+// ======================================
 // CREATE CARD
+// ======================================
 
 function createCard(item, type, index) {
+
     return `
         <a href="detail.html?type=${type}&id=${index}"
            class="item-card">
 
-            <img src="${item.image}" alt="${item.name}"
-                 onerror="this.style.visibility='hidden'">
+            <img
+                src="${item.image}"
+                alt="${item.name}"
+                loading="lazy"
+                onerror="this.style.visibility='hidden'"
+            >
 
             <div class="item-info">
+
                 <h3>${item.name}</h3>
+
                 <p>${item.description}</p>
+
             </div>
 
             <span class="item-arrow">›</span>
+
         </a>
     `;
 }
 
 
+// ======================================
 // DISPLAY LIST
+// ======================================
 
 function displayList() {
+
     const gamesGrid = document.getElementById("gamesGrid");
-    const platformsGrid = document.getElementById("platformsGrid");
+
+    const platformsGrid =
+        document.getElementById("platformsGrid");
 
     if (gamesGrid) {
+
         gamesGrid.innerHTML = games
-            .map((item, i) => createCard(item, "games", i))
+            .map((item, index) =>
+                createCard(item, "games", index)
+            )
             .join("");
+
     }
 
     if (platformsGrid) {
+
         platformsGrid.innerHTML = platforms
-            .map((item, i) => createCard(item, "platforms", i))
+            .map((item, index) =>
+                createCard(item, "platforms", index)
+            )
             .join("");
+
     }
 }
 
 
+// ======================================
 // DISPLAY DETAIL
+// ======================================
 
 function displayDetail() {
-    const params = new URLSearchParams(window.location.search);
+
+    const params =
+        new URLSearchParams(window.location.search);
 
     const type = params.get("type");
+
     const id = Number(params.get("id"));
 
-    const data = type === "games" ? games :
-                 type === "platforms" ? platforms : null;
+    const data =
+        type === "games" ? games :
+        type === "platforms" ? platforms :
+        null;
 
-    if (!data || !Number.isInteger(id) || !data[id]) {
-        document.getElementById("detailTitle").textContent =
-            "ไม่พบข้อมูล";
+    const title =
+        document.getElementById("detailTitle");
 
-        document.getElementById("detailDescription").textContent =
+    const description =
+        document.getElementById("detailDescription");
+
+    const image =
+        document.getElementById("detailImage");
+
+    if (!title || !description || !image) return;
+
+    if (
+        !data ||
+        !Number.isInteger(id) ||
+        !data[id]
+    ) {
+
+        title.textContent = "ไม่พบข้อมูล";
+
+        description.textContent =
             "ไม่พบรายการที่คุณต้องการ";
+
+        image.style.display = "none";
 
         return;
     }
 
     const item = data[id];
 
-    document.getElementById("detailTitle").textContent =
-        item.name;
+    title.textContent = item.name;
 
-    document.getElementById("detailDescription").textContent =
-        item.detail;
+    description.textContent = item.detail;
 
-    document.title = item.name + " | Furinas(433)";
+    image.src = item.image;
+
+    image.alt = item.name;
+
+    image.style.display = "block";
+
+    document.title =
+        item.name + " | Furinas(433)";
 }
 
 
-// START
+// ======================================
+// INITIALIZE
+// ======================================
 
 displayList();
 
-if (document.getElementById("detailTitle")) {
-    displayDetail();
-}
+displayDetail();
