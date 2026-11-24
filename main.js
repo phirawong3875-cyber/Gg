@@ -1,194 +1,53 @@
 
-// ======================================
-// FURINAS(433) PROFILE
-// MAIN SYSTEM
-// ======================================
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b1c">
+  <title>รายละเอียด | Furinas(433)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-// GAME DATA
+  <div class="background-glow"></div>
 
-const games = [
-    {
-        name: "Arknights: Endfield",
-        image: "assets/games/endfield.png",
-        description: "เกมของฉัน",
-        detail: "ข้อมูลเกี่ยวกับ Arknights: Endfield"
-    },
-    {
-        name: "Zenless Zone Zero",
-        image: "assets/games/zzz.png",
-        description: "เกมของฉัน",
-        detail: "ข้อมูลเกี่ยวกับ Zenless Zone Zero"
-    },
-    {
-        name: "Minecraft",
-        image: "assets/games/minecraft.png",
-        description: "เกมของฉัน",
-        detail: "ข้อมูลเกี่ยวกับ Minecraft"
-    }
-];
+  <main class="container">
 
+    <a href="index.html" class="back-button">
+      ← กลับหน้าหลัก
+    </a>
 
-// PLATFORM DATA
+    <section class="detail-hero">
 
-const platforms = [
-    {
-        name: "Discord",
-        image: "https://cdn.simpleicons.org/discord/ffffff",
-        description: "แพลตฟอร์มของฉัน",
-        detail: "ข้อมูล Discord"
-    },
-    {
-        name: "Instagram",
-        image: "https://cdn.simpleicons.org/instagram/E4405F",
-        description: "แพลตฟอร์มของฉัน",
-        detail: "ข้อมูล Instagram"
-    },
-    {
-        name: "HoYoLAB",
-        image: "https://cdn.simpleicons.org/hoyolab/ffffff",
-        description: "แพลตฟอร์มของฉัน",
-        detail: "ข้อมูล HoYoLAB"
-    },
-    {
-        name: "Kahoot!",
-        image: "https://cdn.simpleicons.org/kahoot/ffffff",
-        description: "แพลตฟอร์มของฉัน",
-        detail: "ข้อมูล Kahoot!"
-    }
-];
+      <div class="detail-image">
+        <img
+          id="detailImage"
+          src=""
+          alt="รูปภาพรายละเอียด"
+          onerror="this.style.display='none'"
+        >
+      </div>
 
+      <div class="detail-content">
+        <span class="detail-label">PROFILE INFORMATION</span>
 
-// ======================================
-// CREATE CARD
-// ======================================
+        <h1 id="detailTitle">กำลังโหลด...</h1>
 
-function createCard(item, type, index) {
+        <p id="detailDescription">
+          กำลังโหลดข้อมูล กรุณารอสักครู่...
+        </p>
+      </div>
 
-    return `
-        <a href="detail.html?type=${type}&id=${index}"
-           class="item-card">
+    </section>
 
-            <img
-                src="${item.image}"
-                alt="${item.name}"
-                loading="lazy"
-                onerror="this.style.visibility='hidden'"
-            >
+    <footer class="footer">
+      <p>© 2026 Furinas(433) — All Rights Reserved.</p>
+      <p>Made with ♡</p>
+    </footer>
 
-            <div class="item-info">
+  </main>
 
-                <h3>${item.name}</h3>
-
-                <p>${item.description}</p>
-
-            </div>
-
-            <span class="item-arrow">›</span>
-
-        </a>
-    `;
-}
-
-
-// ======================================
-// DISPLAY LIST
-// ======================================
-
-function displayList() {
-
-    const gamesGrid = document.getElementById("gamesGrid");
-
-    const platformsGrid =
-        document.getElementById("platformsGrid");
-
-    if (gamesGrid) {
-
-        gamesGrid.innerHTML = games
-            .map((item, index) =>
-                createCard(item, "games", index)
-            )
-            .join("");
-
-    }
-
-    if (platformsGrid) {
-
-        platformsGrid.innerHTML = platforms
-            .map((item, index) =>
-                createCard(item, "platforms", index)
-            )
-            .join("");
-
-    }
-}
-
-
-// ======================================
-// DISPLAY DETAIL
-// ======================================
-
-function displayDetail() {
-
-    const params =
-        new URLSearchParams(window.location.search);
-
-    const type = params.get("type");
-
-    const id = Number(params.get("id"));
-
-    const data =
-        type === "games" ? games :
-        type === "platforms" ? platforms :
-        null;
-
-    const title =
-        document.getElementById("detailTitle");
-
-    const description =
-        document.getElementById("detailDescription");
-
-    const image =
-        document.getElementById("detailImage");
-
-    if (!title || !description || !image) return;
-
-    if (
-        !data ||
-        !Number.isInteger(id) ||
-        !data[id]
-    ) {
-
-        title.textContent = "ไม่พบข้อมูล";
-
-        description.textContent =
-            "ไม่พบรายการที่คุณต้องการ";
-
-        image.style.display = "none";
-
-        return;
-    }
-
-    const item = data[id];
-
-    title.textContent = item.name;
-
-    description.textContent = item.detail;
-
-    image.src = item.image;
-
-    image.alt = item.name;
-
-    image.style.display = "block";
-
-    document.title =
-        item.name + " | Furinas(433)";
-}
-
-
-// ======================================
-// INITIALIZE
-// ======================================
-
-displayList();
-
-displayDetail();
+  <script src="main.js"></script>
+</body>
+</html>
