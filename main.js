@@ -1,53 +1,104 @@
 
-<!DOCTYPE html>
-<html lang="th">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080b1c">
-  <title>รายละเอียด | Furinas(433)</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+async function loadItems() {
+  try {
+    const response = await fetch("data/items.json");
 
-  <div class="background-glow"></div>
+    if (!response.ok) {
+      throw new Error("ไม่สามารถโหลด items.json ได้");
+    }
 
-  <main class="container">
+    const data = await response.json();
 
-    <a href="index.html" class="back-button">
-      ← กลับหน้าหลัก
+    displayList(data);
+    displayDetail(data);
+
+  } catch (error) {
+    console.error("เกิดข้อผิดพลาด:", error);
+
+    const gamesGrid = document.getElementById("gamesGrid");
+    const platformsGrid = document.getElementById("platformsGrid");
+
+    if (gamesGrid) {
+      gamesGrid.innerHTML = "<p>ไม่สามารถโหลดข้อมูลเกมได้</p>";
+    }
+
+    if (platformsGrid) {
+      platformsGrid.innerHTML = "<p>ไม่สามารถโหลดข้อมูลแพลตฟอร์มได้</p>";
+    }
+  }
+}
+
+function createCard(item, type, index) {
+  return `
+    <a href="detail.html?type=${type}&id=${index}" class="item-card">
+      <img
+        src="${item.image}"
+        alt="${item.name}"
+        loading="lazy"
+        onerror="this.style.visibility='hidden'"
+      >
+
+      <div class="item-info">
+        <h3>${item.name}</h3>
+        <p>${item.description}</p>
+      </div>
+
+      <span class="item-arrow">›</span>
     </a>
+  `;
+}
 
-    <section class="detail-hero">
+function displayList(data) {
+  const gamesGrid = document.getElementById("gamesGrid");
+  const platformsGrid = document.getElementById("platformsGrid");
 
-      <div class="detail-image">
-        <img
-          id="detailImage"
-          src=""
-          alt="รูปภาพรายละเอียด"
-          onerror="this.style.display='none'"
-        >
-      </div>
+  if (gamesGrid) {
+    gamesGrid.innerHTML = data.games
+      .map((item, index) => createCard(item, "games", index))
+      .join("");
+  }
 
-      <div class="detail-content">
-        <span class="detail-label">PROFILE INFORMATION</span>
+  if (platformsGrid) {
+    platformsGrid.innerHTML = data.platforms
+      .map((item, index) => createCard(item, "platforms", index))
+      .join("");
+  }
+}
 
-        <h1 id="detailTitle">กำลังโหลด...</h1>
+function displayDetail(data) {
+  const params = new URLSearchParams(window.location.search);
 
-        <p id="detailDescription">
-          กำลังโหลดข้อมูล กรุณารอสักครู่...
-        </p>
-      </div>
+  const type = params.get("type");
+  const id = Number(params.get("id"));
 
-    </section>
+  const title = document.getElementById("detailTitle");
+  const description = document.getElementById("detailDescription");
+  const image = document.getElementById("detailImage");
 
-    <footer class="footer">
-      <p>© 2026 Furinas(433) — All Rights Reserved.</p>
-      <p>Made with ♡</p>
-    </footer>
+  if (!title || !description || !image) return;
 
-  </main>
+  const items = type === "games"
+    ? data.games
+    : type === "platforms"
+      ? data.platforms
+      : null;
 
-  <script src="main.js"></script>
-</body>
-</html>
+  if (!items || !Number.isInteger(id) || !items[id]) {
+    title.textContent = "ไม่พบข้อมูล";
+    description.textContent = "ไม่พบรายการที่คุณต้องการ";
+    image.style.display = "none";
+    return;
+  }
+
+  const item = items[id];
+
+  title.textContent = item.name;
+  description.textContent = item.detail;
+  image.src = item.image;
+  image.alt = item.name;
+  image.style.display = "block";
+
+  document.title = item.name + " | Furinas(433)";
+}
+
+loadItems();
