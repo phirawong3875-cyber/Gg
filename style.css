@@ -783,3 +783,16 @@ img {
     transition-duration: 0.01ms !important;
   }
 }
+.profile-item {
+    margin-top: 25px;
+}
+
+.profile-item h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.profile-item p {
+    font-size: 20px;
+    margin: 0;
+}
