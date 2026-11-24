@@ -1,75 +1,67 @@
 
 // ==============================
 // FURINAS(433) PROFILE
-// Main JavaScript
+// MAIN SYSTEM
 // ==============================
-
-// GAME DATA
 
 const games = [
     {
         name: "Arknights: Endfield",
         image: "assets/games/endfield.png",
-        description: "ดูข้อมูลเกม",
-        link: "#"
+        description: "เกมของฉัน",
+        detail: "ข้อมูลเกี่ยวกับ Arknights: Endfield"
     },
     {
         name: "Zenless Zone Zero",
         image: "assets/games/zzz.png",
-        description: "ดูข้อมูลเกม",
-        link: "#"
+        description: "เกมของฉัน",
+        detail: "ข้อมูลเกี่ยวกับ Zenless Zone Zero"
     },
     {
         name: "Minecraft",
         image: "assets/games/minecraft.png",
-        description: "ดูข้อมูลเกม",
-        link: "#"
+        description: "เกมของฉัน",
+        detail: "ข้อมูลเกี่ยวกับ Minecraft"
     }
 ];
-
-
-// PLATFORM DATA
 
 const platforms = [
     {
         name: "Discord",
         image: "https://cdn.simpleicons.org/discord/ffffff",
-        description: "ดูข้อมูลแพลตฟอร์ม",
-        link: "#"
+        description: "แพลตฟอร์มของฉัน",
+        detail: "ข้อมูล Discord"
     },
     {
         name: "Instagram",
         image: "https://cdn.simpleicons.org/instagram/E4405F",
-        description: "ดูข้อมูลแพลตฟอร์ม",
-        link: "#"
+        description: "แพลตฟอร์มของฉัน",
+        detail: "ข้อมูล Instagram"
     },
     {
         name: "HoYoLAB",
         image: "https://cdn.simpleicons.org/hoyolab/ffffff",
-        description: "ดูข้อมูลแพลตฟอร์ม",
-        link: "#"
+        description: "แพลตฟอร์มของฉัน",
+        detail: "ข้อมูล HoYoLAB"
     },
     {
         name: "Kahoot!",
         image: "https://cdn.simpleicons.org/kahoot/ffffff",
-        description: "ดูข้อมูลแพลตฟอร์ม",
-        link: "#"
+        description: "แพลตฟอร์มของฉัน",
+        detail: "ข้อมูล Kahoot!"
     }
 ];
 
 
 // CREATE CARD
 
-function createCard(item) {
-
+function createCard(item, type, index) {
     return `
-        <a href="${item.link}" class="item-card">
+        <a href="detail.html?type=${type}&id=${index}"
+           class="item-card">
 
-            <img
-                src="${item.image}"
-                alt="${item.name}"
-                onerror="this.style.visibility='hidden'"
-            >
+            <img src="${item.image}" alt="${item.name}"
+                 onerror="this.style.visibility='hidden'">
 
             <div class="item-info">
                 <h3>${item.name}</h3>
@@ -77,29 +69,68 @@ function createCard(item) {
             </div>
 
             <span class="item-arrow">›</span>
-
         </a>
     `;
 }
 
 
-// DISPLAY GAMES
+// DISPLAY LIST
 
-const gamesGrid = document.getElementById("gamesGrid");
+function displayList() {
+    const gamesGrid = document.getElementById("gamesGrid");
+    const platformsGrid = document.getElementById("platformsGrid");
 
-if (gamesGrid) {
-    gamesGrid.innerHTML = games
-        .map(createCard)
-        .join("");
+    if (gamesGrid) {
+        gamesGrid.innerHTML = games
+            .map((item, i) => createCard(item, "games", i))
+            .join("");
+    }
+
+    if (platformsGrid) {
+        platformsGrid.innerHTML = platforms
+            .map((item, i) => createCard(item, "platforms", i))
+            .join("");
+    }
 }
 
 
-// DISPLAY PLATFORMS
+// DISPLAY DETAIL
 
-const platformsGrid = document.getElementById("platformsGrid");
+function displayDetail() {
+    const params = new URLSearchParams(window.location.search);
 
-if (platformsGrid) {
-    platformsGrid.innerHTML = platforms
-        .map(createCard)
-        .join("");
+    const type = params.get("type");
+    const id = Number(params.get("id"));
+
+    const data = type === "games" ? games :
+                 type === "platforms" ? platforms : null;
+
+    if (!data || !Number.isInteger(id) || !data[id]) {
+        document.getElementById("detailTitle").textContent =
+            "ไม่พบข้อมูล";
+
+        document.getElementById("detailDescription").textContent =
+            "ไม่พบรายการที่คุณต้องการ";
+
+        return;
+    }
+
+    const item = data[id];
+
+    document.getElementById("detailTitle").textContent =
+        item.name;
+
+    document.getElementById("detailDescription").textContent =
+        item.detail;
+
+    document.title = item.name + " | Furinas(433)";
+}
+
+
+// START
+
+displayList();
+
+if (document.getElementById("detailTitle")) {
+    displayDetail();
 }
