@@ -1,25 +1,15 @@
-
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Player Profile | Furinas(433)</title>
-
     <meta name="theme-color" content="#091a38">
-
     <link rel="stylesheet" href="detail.css">
 </head>
-
 <body>
-
     <main class="detail-container">
-
-        <a href="index.html" class="back-button">
-            ← กลับหน้าหลัก
-        </a>
+        <a href="index.html" class="back-button">← กลับหน้าหลัก</a>
 
         <!-- Banner -->
         <div class="detail-banner">
@@ -28,60 +18,35 @@
 
         <!-- Profile Header -->
         <section class="profile-header">
-
-            <img
-                id="detailImage"
-                class="profile-avatar"
-                src=""
-                alt="Profile Image"
-            >
-
+            <img id="detailImage" class="profile-avatar" src="" alt="Profile Image">
             <div class="profile-info">
                 <h1 id="detailTitle">Loading...</h1>
-
                 <p id="detailDescription"></p>
-
-                <span class="profile-badge" id="detailBadge">
-                    PLAYER PROFILE
-                </span>
+                <span class="profile-badge" id="detailBadge">PLAYER PROFILE</span>
             </div>
-
         </section>
 
-        <!-- Categories -->
+        <!-- Information -->
         <section class="detail-section" id="informationSection">
-
-            <h2 class="section-title">
-                INFORMATION
-            </h2>
-
+            <h2 class="section-title">INFORMATION</h2>
             <div class="category-grid" id="categoryContainer"></div>
-
         </section>
 
         <!-- Gallery -->
         <section class="detail-section" id="gallerySection">
-
-            <h2 class="section-title">
-                GALLERY
-            </h2>
-
+            <h2 class="section-title">GALLERY</h2>
             <div class="gallery-grid" id="galleryContainer"></div>
-
         </section>
 
         <!-- Footer -->
         <footer class="detail-footer">
             © 2026 Furinas(433) | My Profile
         </footer>
-
     </main>
 
     <script>
         async function loadDetail() {
-
             const params = new URLSearchParams(window.location.search);
-
             const type = params.get("type") || "games";
             const id = Number(params.get("id"));
 
@@ -93,7 +58,6 @@
             }
 
             try {
-
                 const response = await fetch("data/items.json");
 
                 if (!response.ok) {
@@ -101,7 +65,6 @@
                 }
 
                 const data = await response.json();
-
                 const item = data[type]?.[id];
 
                 if (!item) {
@@ -109,37 +72,37 @@
                 }
 
                 // Profile
-                document.title = item.name + " | Furinas(433)";
+                document.title = `${item.name || "Unknown"} | Furinas(433)`;
+                document.getElementById("detailTitle").textContent = item.name || "Unknown";
+                document.getElementById("detailDescription").textContent = item.description || "";
 
-                document.getElementById("detailTitle").textContent =
-                    item.name || "Unknown";
+                // Profile Image
+                document.getElementById("detailImage").src = item.image || "";
 
-                document.getElementById("detailDescription").textContent =
-                    item.description || "";
+                // Banner Image (แยกจาก Profile Image)
+                const banner = document.getElementById("detailBanner");
 
-                document.getElementById("detailImage").src =
-                    item.image || "";
+                if (item.banner) {
+                    banner.src = item.banner;
+                } else {
+                    document.querySelector(".detail-banner").hidden = true;
+                }
 
-                document.getElementById("detailBanner").src =
-                    item.image || "";
-
+                // Badge
                 document.getElementById("detailBadge").textContent =
                     type === "games" ? "GAME PROFILE" : "PLATFORM PROFILE";
 
                 // Categories
-                const categoryContainer =
-                    document.getElementById("categoryContainer");
-
+                const categoryContainer = document.getElementById("categoryContainer");
                 const categories = item.categories || {};
 
                 for (const [categoryName, fields] of Object.entries(categories)) {
-
-                    const validFields = Object.entries(fields || {})
-                        .filter(([key, value]) =>
+                    const validFields = Object.entries(fields || {}).filter(
+                        ([key, value]) =>
                             value !== null &&
                             value !== undefined &&
                             String(value).trim() !== ""
-                        );
+                    );
 
                     if (validFields.length === 0) continue;
 
@@ -148,11 +111,9 @@
 
                     const title = document.createElement("h3");
                     title.textContent = categoryName;
-
                     card.appendChild(title);
 
                     validFields.forEach(([key, value]) => {
-
                         const row = document.createElement("div");
                         row.className = "info-item";
 
@@ -164,9 +125,7 @@
 
                         row.appendChild(label);
                         row.appendChild(content);
-
                         card.appendChild(row);
-
                     });
 
                     categoryContainer.appendChild(card);
@@ -177,24 +136,20 @@
                 }
 
                 // Gallery
-                const galleryContainer =
-                    document.getElementById("galleryContainer");
-
+                const galleryContainer = document.getElementById("galleryContainer");
                 const gallery = item.gallery || [];
 
                 gallery.forEach(imagePath => {
-
                     const wrapper = document.createElement("div");
                     wrapper.className = "gallery-item";
 
                     const image = document.createElement("img");
                     image.src = imagePath;
-                    image.alt = item.name + " Gallery";
+                    image.alt = `${item.name} Gallery`;
                     image.loading = "lazy";
 
                     wrapper.appendChild(image);
                     galleryContainer.appendChild(wrapper);
-
                 });
 
                 if (gallery.length === 0) {
@@ -202,22 +157,27 @@
                 }
 
             } catch (error) {
-
                 console.error(error);
 
-                document.querySelector(".detail-container").innerHTML = `
-                    <h2>เกิดข้อผิดพลาดในการโหลดข้อมูล</h2>
-                    <p>${error.message}</p>
-                    <a href="index.html" class="back-button">
-                        กลับหน้าหลัก
-                    </a>
-                `;
+                const container = document.querySelector(".detail-container");
+                container.innerHTML = "";
 
+                const title = document.createElement("h2");
+                title.textContent = "เกิดข้อผิดพลาดในการโหลดข้อมูล";
+
+                const message = document.createElement("p");
+                message.textContent = error.message;
+
+                const back = document.createElement("a");
+                back.href = "index.html";
+                back.className = "back-button";
+                back.textContent = "กลับหน้าหลัก";
+
+                container.append(title, message, back);
             }
         }
 
         loadDetail();
     </script>
-
 </body>
 </html>
