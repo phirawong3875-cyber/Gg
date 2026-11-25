@@ -98,7 +98,7 @@
     {
       "name": "HoYoLAB",
       "image": "https://cdn.simpleicons.org/hoyolab/ffffff",
-      "banner": null,
+      "banner": "assets/app/Hoyolab/Screenshot_20261125_192410.jpg",
       "description": "แพลตฟอร์มของฉัน",
       "categories": {
         "ข้อมูลแอป": {
@@ -111,7 +111,7 @@
         }
       },
       "gallery": [
-        "assets/app/Hoyolab/Screenshot_20261125_192410.jpg",
+        "assets/games/endfield-2.png",
         "assets/games/endfield-2.png"
       ]
     },
