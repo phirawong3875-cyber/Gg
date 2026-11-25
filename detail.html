@@ -3,74 +3,97 @@
 <html lang="th">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>รายละเอียด | Furinas(433)</title>
+    <title>Furinas(433) | Game Profile</title>
 
-  <meta name="description" content="Furinas(433) Personal Profile">
-  <meta name="theme-color" content="#07194a">
+    <meta name="theme-color" content="#0b1c3b">
+    <meta name="description" content="Furinas(433) Gaming Profile">
 
-  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
 </head>
 
-<body>
+<body class="detail-page">
 
-  <div class="background-glow"></div>
+    <main class="profile-container">
 
-  <main class="container">
+        <!-- Back Button -->
+        <a href="index.html" class="back-button">
+            <span>←</span> กลับหน้าหลัก
+        </a>
 
-    <!-- BACK BUTTON -->
-    <a href="index.html" class="back-button">
-      <span>←</span>
-      กลับหน้าหลัก
-    </a>
+        <!-- Game Banner -->
+        <section class="profile-banner">
+            <div class="banner-overlay">
+                <span class="banner-label">FURINAS(433) / GAMING DATABASE</span>
+                <span class="banner-caption">MY GAME COLLECTION</span>
+            </div>
+        </section>
 
-    <!-- DETAIL HEADER -->
-    <section class="detail-hero">
+        <!-- Profile Header -->
+        <section class="profile-header">
 
-      <div class="detail-image">
-        <img
-          id="detailImage"
-          src=""
-          alt="รูปภาพรายการ"
-          onerror="this.style.display='none'"
-        >
-      </div>
+            <div class="profile-avatar">
+                <img
+                    id="detailImage"
+                    src=""
+                    alt="Game Profile"
+                >
+            </div>
 
-      <div class="detail-content">
+            <div class="profile-heading">
 
-        <span class="detail-label">
-          FURINAS(433) PROFILE
-        </span>
+                <p class="profile-owner">FURINAS(433)</p>
 
-        <h1 id="detailTitle">
-          กำลังโหลด...
-        </h1>
+                <h1 id="detailTitle">
+                    Loading...
+                </h1>
 
-        <p id="detailDescription">
-          กำลังโหลดข้อมูล...
-        </p>
+                <span class="profile-badge">
+                    <span class="status-dot"></span>
+                    PLAYER PROFILE
+                </span>
 
-      </div>
+                <p id="detailDescription" class="profile-description"></p>
 
-    </section>
+            </div>
 
-    <!-- DETAIL SECTIONS
-         main.js จะสร้างข้อมูลตรงนี้อัตโนมัติ
-    -->
+        </section>
 
-    <div id="detailSections" class="detail-sections"></div>
+        <div class="profile-divider"></div>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-      <p>© 2026 Furinas(433) — All Rights Reserved.</p>
-      <p>Made with ♡</p>
-    </footer>
+        <!-- Dynamic Game Information -->
+        <section class="information-section">
 
-  </main>
+            <div class="section-heading">
+                <span class="section-line"></span>
+                <h2>GAME INFORMATION</h2>
+            </div>
 
-  <script src="main.js"></script>
+            <div id="detailSections" class="detail-sections">
+                <div class="loading-message">
+                    Loading profile data...
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        <footer class="profile-footer">
+
+            <div class="footer-logo">
+                FURINAS<span>(433)</span>
+            </div>
+
+            <p>© 2026 Furinas(433) — All Rights Reserved.</p>
+
+            <p class="footer-credit">Made with ♡</p>
+
+        </footer>
+
+    </main>
 
 </body>
 </html>
