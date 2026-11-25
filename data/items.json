@@ -4,6 +4,7 @@
     {
       "name": "Arknights: Endfield",
       "image": "assets/games/Endfield/images (1).jpeg",
+      "banner": null,
       "description": "เกมของฉัน",
       "categories": {
         "ข้อมูลเกม": {
@@ -23,6 +24,7 @@
     {
       "name": "Zenless Zone Zero",
       "image": "assets/games/ZZZ/images (2).jpeg",
+      "banner": null,
       "description": "เกมของฉัน",
       "categories": {
         "ข้อมูลเกม": {
@@ -42,6 +44,7 @@
     {
       "name": "Minecraft",
       "image": "assets/games/Mc/images (3).jpeg",
+      "banner": null,
       "description": "เกมของฉัน",
       "categories": {
         "ข้อมูลเกม": {
@@ -61,6 +64,7 @@
     {
       "name": "Discord",
       "image": "https://cdn.simpleicons.org/discord/ffffff",
+      "banner": null,
       "description": "แพลตฟอร์มของฉัน",
       "categories": {
         "ข้อมูลแอป": {
@@ -77,6 +81,7 @@
     {
       "name": "Instagram",
       "image": "https://cdn.simpleicons.org/instagram/E4405F",
+      "banner": null,
       "description": "แพลตฟอร์มของฉัน",
       "categories": {
         "ข้อมูลแอป": {
@@ -93,6 +98,7 @@
     {
       "name": "HoYoLAB",
       "image": "https://cdn.simpleicons.org/hoyolab/ffffff",
+      "banner": null,
       "description": "แพลตฟอร์มของฉัน",
       "categories": {
         "ข้อมูลแอป": {
@@ -109,6 +115,7 @@
     {
       "name": "Kahoot!",
       "image": "https://cdn.simpleicons.org/kahoot/ffffff",
+      "banner": null,
       "description": "แพลตฟอร์มของฉัน",
       "categories": {
         "ข้อมูลแอป": {
