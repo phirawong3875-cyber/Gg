@@ -97,7 +97,7 @@
     },
     {
       "name": "HoYoLAB",
-      "image": "https://cdn.simpleicons.org/hoyolab/ffffff",
+      "image": "assets/app/Hoyolab/images.png",
       "banner": "assets/app/Hoyolab/Screenshot_20261125_192410.jpg",
       "description": "แพลตฟอร์มของฉัน",
       "categories": {
