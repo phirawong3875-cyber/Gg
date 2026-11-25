@@ -3,74 +3,221 @@
 <html lang="th">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>รายละเอียด | Furinas(433)</title>
+    <title>Player Profile | Furinas(433)</title>
 
-  <meta name="description" content="Furinas(433) Personal Profile">
-  <meta name="theme-color" content="#07194a">
+    <meta name="theme-color" content="#091a38">
 
-  <link rel="stylesheet" href="detail.css">
+    <link rel="stylesheet" href="detail.css">
 </head>
 
 <body>
 
-  <div class="background-glow"></div>
+    <main class="detail-container">
 
-  <main class="container">
+        <a href="index.html" class="back-button">
+            ← กลับหน้าหลัก
+        </a>
 
-    <!-- BACK BUTTON -->
-    <a href="index.html" class="back-button">
-      <span>←</span>
-      กลับหน้าหลัก
-    </a>
+        <!-- Banner -->
+        <div class="detail-banner">
+            <img id="detailBanner" src="" alt="Profile Banner">
+        </div>
 
-    <!-- DETAIL HEADER -->
-    <section class="detail-hero">
+        <!-- Profile Header -->
+        <section class="profile-header">
 
-      <div class="detail-image">
-        <img
-          id="detailImage"
-          src=""
-          alt="รูปภาพรายการ"
-          onerror="this.style.display='none'"
-        >
-      </div>
+            <img
+                id="detailImage"
+                class="profile-avatar"
+                src=""
+                alt="Profile Image"
+            >
 
-      <div class="detail-content">
+            <div class="profile-info">
+                <h1 id="detailTitle">Loading...</h1>
 
-        <span class="detail-label">
-          FURINAS(433) PROFILE
-        </span>
+                <p id="detailDescription"></p>
 
-        <h1 id="detailTitle">
-          กำลังโหลด...
-        </h1>
+                <span class="profile-badge" id="detailBadge">
+                    PLAYER PROFILE
+                </span>
+            </div>
 
-        <p id="detailDescription">
-          กำลังโหลดข้อมูล...
-        </p>
+        </section>
 
-      </div>
+        <!-- Categories -->
+        <section class="detail-section" id="informationSection">
 
-    </section>
+            <h2 class="section-title">
+                INFORMATION
+            </h2>
 
-    <!-- DETAIL SECTIONS
-         main.js จะสร้างข้อมูลตรงนี้อัตโนมัติ
-    -->
+            <div class="category-grid" id="categoryContainer"></div>
 
-    <div id="detailSections" class="detail-sections"></div>
+        </section>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-      <p>© 2026 Furinas(433) — All Rights Reserved.</p>
-      <p>Made with ♡</p>
-    </footer>
+        <!-- Gallery -->
+        <section class="detail-section" id="gallerySection">
 
-  </main>
+            <h2 class="section-title">
+                GALLERY
+            </h2>
 
-  <script src="main.js"></script>
+            <div class="gallery-grid" id="galleryContainer"></div>
+
+        </section>
+
+        <!-- Footer -->
+        <footer class="detail-footer">
+            © 2026 Furinas(433) | My Profile
+        </footer>
+
+    </main>
+
+    <script>
+        async function loadDetail() {
+
+            const params = new URLSearchParams(window.location.search);
+
+            const type = params.get("type") || "games";
+            const id = Number(params.get("id"));
+
+            const allowedTypes = ["games", "platforms"];
+
+            if (!allowedTypes.includes(type) || !Number.isInteger(id) || id < 0) {
+                document.body.innerHTML = "<h2>ไม่พบข้อมูลที่ต้องการ</h2>";
+                return;
+            }
+
+            try {
+
+                const response = await fetch("data/items.json");
+
+                if (!response.ok) {
+                    throw new Error("ไม่สามารถโหลด items.json ได้");
+                }
+
+                const data = await response.json();
+
+                const item = data[type]?.[id];
+
+                if (!item) {
+                    throw new Error("ไม่พบข้อมูลรายการนี้");
+                }
+
+                // Profile
+                document.title = item.name + " | Furinas(433)";
+
+                document.getElementById("detailTitle").textContent =
+                    item.name || "Unknown";
+
+                document.getElementById("detailDescription").textContent =
+                    item.description || "";
+
+                document.getElementById("detailImage").src =
+                    item.image || "";
+
+                document.getElementById("detailBanner").src =
+                    item.image || "";
+
+                document.getElementById("detailBadge").textContent =
+                    type === "games" ? "GAME PROFILE" : "PLATFORM PROFILE";
+
+                // Categories
+                const categoryContainer =
+                    document.getElementById("categoryContainer");
+
+                const categories = item.categories || {};
+
+                for (const [categoryName, fields] of Object.entries(categories)) {
+
+                    const validFields = Object.entries(fields || {})
+                        .filter(([key, value]) =>
+                            value !== null &&
+                            value !== undefined &&
+                            String(value).trim() !== ""
+                        );
+
+                    if (validFields.length === 0) continue;
+
+                    const card = document.createElement("div");
+                    card.className = "category-card";
+
+                    const title = document.createElement("h3");
+                    title.textContent = categoryName;
+
+                    card.appendChild(title);
+
+                    validFields.forEach(([key, value]) => {
+
+                        const row = document.createElement("div");
+                        row.className = "info-item";
+
+                        const label = document.createElement("span");
+                        label.textContent = key;
+
+                        const content = document.createElement("span");
+                        content.textContent = value;
+
+                        row.appendChild(label);
+                        row.appendChild(content);
+
+                        card.appendChild(row);
+
+                    });
+
+                    categoryContainer.appendChild(card);
+                }
+
+                if (!categoryContainer.children.length) {
+                    document.getElementById("informationSection").hidden = true;
+                }
+
+                // Gallery
+                const galleryContainer =
+                    document.getElementById("galleryContainer");
+
+                const gallery = item.gallery || [];
+
+                gallery.forEach(imagePath => {
+
+                    const wrapper = document.createElement("div");
+                    wrapper.className = "gallery-item";
+
+                    const image = document.createElement("img");
+                    image.src = imagePath;
+                    image.alt = item.name + " Gallery";
+                    image.loading = "lazy";
+
+                    wrapper.appendChild(image);
+                    galleryContainer.appendChild(wrapper);
+
+                });
+
+                if (gallery.length === 0) {
+                    document.getElementById("gallerySection").hidden = true;
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+                document.querySelector(".detail-container").innerHTML = `
+                    <h2>เกิดข้อผิดพลาดในการโหลดข้อมูล</h2>
+                    <p>${error.message}</p>
+                    <a href="index.html" class="back-button">
+                        กลับหน้าหลัก
+                    </a>
+                `;
+
+            }
+        }
+
+        loadDetail();
+    </script>
 
 </body>
 </html>
